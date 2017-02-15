@@ -1,0 +1,2 @@
+C:\Users\Stanislav\Desktop\TexasHoldEm C#\TexasHoldEm\TexasHoldEm\bin\Debug\TexasHoldEm.exe.config
+C:\Users\Stanislav\Desktop\TexasHoldEm C#\TexasHoldEm_Bot\bin\Debug\TexasHoldEm.exe.config
