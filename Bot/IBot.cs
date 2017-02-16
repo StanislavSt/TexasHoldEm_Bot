@@ -5,6 +5,6 @@ namespace TexasHoldEm.Bot
 {
     public interface IBot
     {
-        //PokerMove GetMove(Bo)
+        PokerMove GetMove(BotState state, long timeOut);
     }
 }
