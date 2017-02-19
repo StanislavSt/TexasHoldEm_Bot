@@ -8,7 +8,7 @@ namespace TexasHoldEm.Poker
 {
     public class Card
     {
-        private CardHeight height;
+        public CardHeight height;
         private CardSuit suit;
         private int number;
         private static Dictionary<string, Card> stringToCard;

@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bot\Bot.cs" />
+    <Compile Include="Bot\BotState.cs" />
     <Compile Include="Bot\IBot.cs" />
+    <Compile Include="Bot\StarterHandEval.cs" />
+    <Compile Include="Enums\HandCategory.cs" />
     <Compile Include="Poker\Card.cs" />
     <Compile Include="Enums\CardHeight.cs" />
     <Compile Include="Enums\CardSuit.cs" />
