@@ -8,8 +8,6 @@ using TexasHoldEm.Enums;
 
 namespace TexasHoldEm.Bot
 {
-    public class StarterHandEval
-    {
         public static class StarterHandEval
         {
             public static HandCategory Evaluate(BotState state, HandHoldem hand)
@@ -67,9 +65,7 @@ namespace TexasHoldEm.Bot
                             return HandCategory.Pair;
                     }
                 }
-
                 return HandCategory.NoPair;
             }
         }
-    }
     }
