@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TexasHoldEm.Bot;
+using TexasHoldEm.Strategy;
 
 namespace TexasHoldEm
 {
@@ -10,6 +12,8 @@ namespace TexasHoldEm
     {
         static void Main(string[] args)
         {
+            var session = new Session(new PokerStrategy());
+            session.Run();
         }
     }
 }

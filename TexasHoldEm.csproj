@@ -55,6 +55,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bot\Session.cs" />
+    <Compile Include="Strategy\PokerStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

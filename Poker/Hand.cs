@@ -21,7 +21,6 @@ namespace TexasHoldEm.Poker
                 return this.Cards[index];
             return null;
         }
-
         public string HandString()
         {
             string str = "[";
@@ -31,6 +30,5 @@ namespace TexasHoldEm.Poker
             str += this.Cards[this.Cards.Count - 1].toString();
             return str;
         }
-        
     }
 }

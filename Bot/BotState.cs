@@ -23,7 +23,6 @@ namespace TexasHoldEm.Bot
         public int CurrentBet { get; private set; }
         public HandHoldem Hand { get; private set; }
         public List<Card> Table { get; private set; }
-
         public List<int> Sidepots { get; private set; }
         public string MyName { get; private set; }
         public int AmountToCall { get; private set; }
@@ -152,7 +151,6 @@ namespace TexasHoldEm.Bot
                     break;
             }
         }
-
         /// <summary>
         /// Parses tbhe information about blinds,stacks and moves
         /// </summary>

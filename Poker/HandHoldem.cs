@@ -8,11 +8,11 @@ namespace TexasHoldEm.Poker
 {
 	public class HandHoldem : Hand
 	{
-		/**
-	 * A hand containing two cards
-	 * @param firstCard : the first card
-	 * @param secondCard : the second card
-	 */
+        /// <summary>
+        /// A hand containing two cards
+        /// </summary>
+        /// <param name="firstCard">the first card</param>
+        /// <param name="secondCard">the second card</param>
 		public HandHoldem(Card firstCard, Card secondCard)
 		{
 			Cards = new List<Card> { firstCard, secondCard };

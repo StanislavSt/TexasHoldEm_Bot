@@ -10,14 +10,15 @@ namespace TexasHoldEm.Bot
 {
     public class Session
     {
-        public class BotParser
-    {
         private readonly IBot _bot;
 
-        public BotParser(IBot bot)
+        public Session(IBot bot)
         {
             this._bot = bot;
         }
+        /// <summary>
+        /// Runs the bot and starts waiting for input
+        /// </summary>
         public void Run()
         {
             var currentState = new BotState();
@@ -62,5 +63,5 @@ namespace TexasHoldEm.Bot
             }
         }
     }
-    }
 }
+

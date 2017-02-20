@@ -12,9 +12,9 @@ namespace TexasHoldEm.Poker
         private CardSuit suit;
         private int number;
         private static Dictionary<string, Card> stringToCard;
-        /**
-	    * Creates a card object based on a number between 0 and 51
-	    */
+        /// <summary>
+        ///Creates a card object based on a number between 0 and 51
+        /// </summary>
         public Card(int num)
         {
             //Assign the Suit of the card
@@ -80,11 +80,12 @@ namespace TexasHoldEm.Poker
                     break;
             }
         }
-        /**
-	     * Returns the Card object that corresponds with the given card string. The first time this method is called, a
-	     * map of all Cards corresponding with correct input strings is created.
-	     * @param string : the string to be converted to a Card
-	     */
+        /// <summary>
+        ///  Returns the Card object that corresponds with the given card string. 
+        ///  The first time this method is called,
+        ///  a map of all Cards corresponding with correct input strings is created.
+        /// </summary>
+        /// <param name="s">the string to be converted to a Card</param>
         public static Card getCard(string s)
 	    {
 		    if(stringToCard == null)
@@ -98,32 +99,33 @@ namespace TexasHoldEm.Poker
 		    }
             return stringToCard[s];
 	    }
-        /**
-	    * Returns the number of the card as a long.
-	    */
+        /// <summary>
+        /// Returns the number of the card as a long.
+        /// </summary>
         public long getNumber()
         {
             int suitShift = number / 13;
             int heightShift = number % 13;
             return (1L << (16 * suitShift + heightShift));
         }
-        /**
-	    * Returns the height of this card.
-	    */
+        /// <summary>
+        ///Returns the height of this card.
+        /// </summary>
         public CardHeight getHeight()
         {
             return height;
         }
-        /**
-	    * Returns the suit of this card.
-	    */
+        /// <summary>
+        /// Returns the suit of this card.
+        /// </summary>
         public CardSuit getSuit()
         {
             return suit;
         }
-        /**
-	 * Returns a String representation of this card.
-	 */
+        /// <summary>
+        /// Returns a String representation of this card.
+        /// </summary>
+        /// <returns>Example: 10s</returns>
         public String toString()
         {
             String str = null;

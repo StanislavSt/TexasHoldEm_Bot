@@ -1,5 +1,4 @@
-﻿
-using TexasHoldEm.Poker;
+﻿using TexasHoldEm.Poker;
 
 namespace TexasHoldEm.Bot
 {

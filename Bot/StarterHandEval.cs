@@ -14,47 +14,38 @@ namespace TexasHoldEm.Bot
             {
                 return CheckRoyalFlush(state, hand);
             }
-
             private static HandCategory CheckRoyalFlush(BotState state, HandHoldem hand)
             {
                 return CheckStraightFlush(state, hand);
             }
-
             private static HandCategory CheckStraightFlush(BotState state, HandHoldem hand)
             {
                 return CheckFourOfAKind(state, hand);
             }
-
             private static HandCategory CheckFourOfAKind(BotState state, HandHoldem hand)
             {
                 return CheckFullHouse(state, hand);
             }
-
             private static HandCategory CheckFullHouse(BotState state, HandHoldem hand)
             {
                 return CheckFlush(state, hand);
             }
-
             private static HandCategory CheckFlush(BotState state, HandHoldem hand)
             {
                 return CheckStraight(state, hand);
             }
-
             private static HandCategory CheckStraight(BotState state, HandHoldem hand)
             {
                 return CheckThreeOfAKind(state, hand);
             }
-
             private static HandCategory CheckThreeOfAKind(BotState state, HandHoldem hand)
             {
                 return CheckTwoPair(state, hand);
             }
-
             private static HandCategory CheckTwoPair(BotState state, HandHoldem hand)
             {
                 return CheckPair(state, hand);
             }
-
             private static HandCategory CheckPair(BotState state, HandHoldem hand)
             {
                 foreach (var card in hand.Cards)
