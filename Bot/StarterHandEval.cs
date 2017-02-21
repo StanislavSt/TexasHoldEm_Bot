@@ -1,62 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using TexasHoldEm.Poker;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TexasHoldEm.Poker;
-using TexasHoldEm.Enums;
-
 namespace TexasHoldEm.Bot
 {
-        public static class StarterHandEval
+    public class StarterHandEval
+    {
+        //Im using a preflop poker chart for evaluation
+        //https://tinyurl.com/je4sdav
+        public static string StartingHandEvalute(BotState state, HandHoldem hand)
         {
-            public static HandCategory Evaluate(BotState state, HandHoldem hand)
+            foreach (var card in hand.Cards)
             {
-                return CheckRoyalFlush(state, hand);
-            }
-            private static HandCategory CheckRoyalFlush(BotState state, HandHoldem hand)
-            {
-                return CheckStraightFlush(state, hand);
-            }
-            private static HandCategory CheckStraightFlush(BotState state, HandHoldem hand)
-            {
-                return CheckFourOfAKind(state, hand);
-            }
-            private static HandCategory CheckFourOfAKind(BotState state, HandHoldem hand)
-            {
-                return CheckFullHouse(state, hand);
-            }
-            private static HandCategory CheckFullHouse(BotState state, HandHoldem hand)
-            {
-                return CheckFlush(state, hand);
-            }
-            private static HandCategory CheckFlush(BotState state, HandHoldem hand)
-            {
-                return CheckStraight(state, hand);
-            }
-            private static HandCategory CheckStraight(BotState state, HandHoldem hand)
-            {
-                return CheckThreeOfAKind(state, hand);
-            }
-            private static HandCategory CheckThreeOfAKind(BotState state, HandHoldem hand)
-            {
-                return CheckTwoPair(state, hand);
-            }
-            private static HandCategory CheckTwoPair(BotState state, HandHoldem hand)
-            {
-                return CheckPair(state, hand);
-            }
-            private static HandCategory CheckPair(BotState state, HandHoldem hand)
-            {
-                foreach (var card in hand.Cards)
+                Card othercard = hand.Cards.Single(x => x != card);
+                // We have a pocket pair
+                if (card.getHeight() == othercard.getHeight())
                 {
-                    foreach (var otherCard in hand.Cards.Where(c => c != card).Union(state.Table))
-                    {
-                        if (card.height == otherCard.height)
-                            return HandCategory.Pair;
-                    }
+                    //If we have 99 or higher we raise
+                    if ((int)card.getHeight() > 7)
+                        return "raise";
+                    //Pocket pair is 88 or smaller , we flat call
+                    else
+                        return "call";
                 }
-                return HandCategory.NoPair;
+                //If we have an Ace we always raise
+                else if (card.getHeight() == CardHeight.ACE)
+                {
+                    return "raise";
+                }
+                else if (card.getHeight() == CardHeight.KING)
+                {
+                    //if we have K6s > we raise 
+                    if (card.getSuit() == othercard.getSuit() && (int)othercard.getHeight() > 6)
+                        return "raise";
+                    else
+                        return "fold";
+                }
+                 // We have suited connectors
+                else if((int)card.getHeight() - (int)othercard.getHeight() < 2  && card.getSuit() == othercard.getSuit())
+                {
+                    return "call";
+                }
             }
+            return "fold";
         }
     }
+}

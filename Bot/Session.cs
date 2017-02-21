@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 using TexasHoldEm.Poker;
 
 namespace TexasHoldEm.Bot
@@ -35,30 +30,33 @@ namespace TexasHoldEm.Bot
                     continue;
                 }
                 var parts = line.Split(' ');
-                if (parts.Length == 3 && parts[0].Equals("Action"))
+
+                switch(parts[0])
                 {
-                    // we need to move
-                    PokerMove move = this._bot.GetMove(currentState, long.Parse(parts[2]));
-                    Console.WriteLine(move.MoveString());
-                }
-                else if (parts.Length == 3 && parts[0].Equals("Settings"))
-                {
-                    // Update the state with settings info
-                    currentState.UpdateSettings(parts[1], parts[2]);
-                }
-                else if (parts.Length == 3 && parts[0].Equals("Match"))
-                {
-                    // Update the state with match info
-                    currentState.UpdateMatch(parts[1], parts[2]);
-                }
-                else if (parts.Length == 3 && parts[0].StartsWith("player"))
-                {
-                    // Update the state with info about the moves
-                    currentState.UpdateMove(parts[0], parts[1], parts[2]);
-                }
-                else
-                {
-                    Console.Error.WriteLine("Unable to parse line {0}", line);
+                    case "Action" :
+                        // we need to move
+                        PokerMove move = this._bot.GetMove(currentState, long.Parse(parts[2]));
+                        Console.WriteLine(move.MoveString());
+                        break;                   
+                    case "Settings" :
+                        // Update the state with settings info
+                        currentState.UpdateSettings(parts[1], parts[2]);
+                        break;
+                    case "Match" :
+                        // Update the state with match info
+                        currentState.UpdateMatch(parts[1], parts[2]);
+                        break;
+                    case "player1" : 
+                        // Update the state with info about the moves
+                        currentState.UpdateMove(parts[0], parts[1], parts[2]);
+                        break;
+                    case "player2" :
+                        // Update the state with info about the moves
+                        currentState.UpdateMove(parts[0], parts[1], parts[2]);
+                        break;
+                    default : 
+                        Console.Error.WriteLine("Unable to parse line {0}", line);
+                        break;
                 }
             }
         }

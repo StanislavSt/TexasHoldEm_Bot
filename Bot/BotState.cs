@@ -30,7 +30,6 @@ namespace TexasHoldEm.Bot
         {
             return this._settings[key];
         }
-
         private readonly Dictionary<string, string> _settings = new Dictionary<string, string>();
         public BotState()
         {
