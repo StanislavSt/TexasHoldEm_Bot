@@ -10,6 +10,7 @@ namespace TexasHoldEm.Bot
         {
             foreach (var card in hand.Cards)
             {
+                //Store the 2nd card in our hand
                 Card othercard = hand.Cards.Single(x => x != card);
                 // We have a pocket pair
                 if (card.getHeight() == othercard.getHeight())
@@ -17,28 +18,37 @@ namespace TexasHoldEm.Bot
                     //If we have 99 or higher we raise
                     if ((int)card.getHeight() > 7)
                         return "raise";
-                    //Pocket pair is 88 or smaller , we flat call
+                    //If we have 88 or smaller , we flat call
                     else
                         return "call";
                 }
                 //If we have an Ace we always raise
                 else if (card.getHeight() == CardHeight.ACE)
-                {
-                    return "raise";
+                {//If the opponent raised , we flat call , otherwise we raise
+                    if (state.OpponentAction.getAction().Equals("raise"))
+                        return "call";
+                    else
+                        return "raise";
                 }
                 else if (card.getHeight() == CardHeight.KING)
                 {
-                    //if we have K6s > we raise 
+                    //IF we have K6 suited or better
                     if (card.getSuit() == othercard.getSuit() && (int)othercard.getHeight() > 6)
-                        return "raise";
+                        //If the opponent raised , we flat call , otherwise we raise
+                        if (state.OpponentAction.getAction().Equals("raise"))
+                            return "call";
+                        else 
+                            return "raise";
                     else
                         return "fold";
                 }
                  // We have suited connectors
                 else if((int)card.getHeight() - (int)othercard.getHeight() < 2  && card.getSuit() == othercard.getSuit())
-                {
-                    return "call";
-                }
+                    //If the opponent raised , we flat call , otherwise we raise
+                    if (state.OpponentAction.getAction().Equals("raise"))
+                        return "call";
+                    else
+                        return "raise";
             }
             return "fold";
         }
