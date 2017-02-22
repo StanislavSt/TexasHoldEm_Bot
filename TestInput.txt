@@ -1,0 +1,33 @@
+Settings hands_per_level 10
+
+Settings starting_stack 2000
+
+Settings your_bot player1
+
+Settings timebank 10000
+
+Settings time_per_move 500
+
+Match round 2
+
+Match small_blind 10
+
+Match big_blind 20
+
+Match on_button player1
+
+player1 stack 2010
+
+player2 stack 1990
+
+player1 post 10
+
+player2 post 20
+
+player1 hand [9s,7s]
+
+Match max_win_pot 30
+
+Match amount_to_call 10
+
+Action player1 10000
