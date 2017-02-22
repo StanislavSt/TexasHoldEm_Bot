@@ -45,8 +45,11 @@ namespace TexasHoldEm.Bot
                  // We have suited connectors
                 else if((int)card.getHeight() - (int)othercard.getHeight() < 2  && card.getSuit() == othercard.getSuit())
                     //If the opponent raised , we flat call , otherwise we raise
-                    if (state.OpponentAction.getAction().Equals("raise"))
-                        return "call";
+                    if (state.OpponentAction !=null)
+                    {
+                        if (state.OpponentAction.getAction().Equals("raise"))
+                            return "call";
+                    }        
                     else
                         return "raise";
             }
