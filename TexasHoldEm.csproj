@@ -45,7 +45,7 @@
     <Compile Include="Bot\BotState.cs" />
     <Compile Include="Bot\IBot.cs" />
     <Compile Include="Bot\HandEval.cs" />
-    <Compile Include="Bot\StarterHandEval.cs" />
+    <Compile Include="Strategy\PreFlopStrategy.cs" />
     <Compile Include="Enums\HandCategory.cs" />
     <Compile Include="Poker\Card.cs" />
     <Compile Include="Enums\CardHeight.cs" />

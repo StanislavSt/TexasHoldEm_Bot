@@ -85,7 +85,7 @@ namespace TexasHoldEm.Bot
                     this.MyName = value;
                     break;
                 //Your time bank starts ticking away, after your time_per_move has finished
-                case "time_bank":
+                case "timebank":
                     this._timebank = int.Parse(value);
                     break;
                 //Amount of time you get for each move

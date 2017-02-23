@@ -12,6 +12,12 @@ namespace TexasHoldEm.Strategy
         {
             return HandEval.Evaluate(state, hand);
         }
+        /// <summary>
+        /// Askins the bot to perform a move, depending on the current state of the game
+        /// </summary>
+        /// <param name="state">Current state of the game</param>
+        /// <param name="timeOut">Represents the time we have to perform a move</param>
+        /// <returns>Returns a PokerMove</returns>
         public PokerMove GetMove(BotState state, long timeOut)
         {
             HandHoldem hand = state.Hand;
@@ -21,7 +27,7 @@ namespace TexasHoldEm.Strategy
             // We are playing preflop
             if (state.Table.Count == 0)
             {
-                string action = StarterHandEval.StartingHandEvalute(state, hand);
+                string action = PreFlopStrategy.StartingHandEvalute(state, hand);
                 switch (action)
                 {
                     case "call":
@@ -45,12 +51,12 @@ namespace TexasHoldEm.Strategy
                 //We have a highcard
                 else
                 {
-                    if(StarterHandEval.StartingHandEvalute(state, hand) == "raise"
+                    if (PreFlopStrategy.StartingHandEvalute(state, hand) == "raise"
                         && state.AmountToCall < 5 * state.Pot)
                         return new PokerMove(state.MyName, "call", state.AmountToCall);
                     else if(!state.OpponentAction.getAction().Equals("raise"))
                         return new PokerMove(state.MyName, "check", 0);
-                    else
+                    else if(state.OpponentAction.getAction().Equals("raise") && state.AmountToCall > state.Pot)
                         return new PokerMove(state.MyName, "fold", 0);
                 }
 
@@ -66,7 +72,7 @@ namespace TexasHoldEm.Strategy
                 //We have a highcard
                 else
                 {
-                    if (StarterHandEval.StartingHandEvalute(state, hand) == "raise"
+                    if (PreFlopStrategy.StartingHandEvalute(state, hand) == "raise"
                         && state.AmountToCall < 5 * state.Pot)
                     {
                         if(state.AmountToCall > 0)
@@ -77,7 +83,7 @@ namespace TexasHoldEm.Strategy
                         
                     if (!state.OpponentAction.getAction().Equals("raise"))
                         return new PokerMove(state.MyName, "check", 0);
-                    else
+                    else if (state.OpponentAction.getAction().Equals("raise") && state.AmountToCall > state.Pot)
                         return new PokerMove(state.MyName, "fold", 0);
                 } 
             }
@@ -92,12 +98,12 @@ namespace TexasHoldEm.Strategy
                 //We have a highcard
                 else
                 {
-                    if (StarterHandEval.StartingHandEvalute(state, hand) == "raise"
+                    if (PreFlopStrategy.StartingHandEvalute(state, hand) == "raise"
                         && state.AmountToCall < 5 * state.Pot)
                         return new PokerMove(state.MyName, "call", state.AmountToCall);
                     if (!state.OpponentAction.getAction().Equals("raise"))
                         return new PokerMove(state.MyName, "check", 0);
-                    else
+                    else if (state.OpponentAction.getAction().Equals("raise") && state.AmountToCall > state.Pot)
                         return new PokerMove(state.MyName, "fold", 0);
                 } 
             }

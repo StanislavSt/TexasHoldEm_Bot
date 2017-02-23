@@ -2,7 +2,10 @@
 using System.Linq;
 namespace TexasHoldEm.Bot
 {
-    public class StarterHandEval
+    /// <summary>
+    /// In this class we evaluate a starting hand
+    /// </summary>
+    public class PreFlopStrategy
     {
         //Im using a preflop poker chart for evaluation
         //https://tinyurl.com/je4sdav
@@ -25,8 +28,11 @@ namespace TexasHoldEm.Bot
                 //If we have an Ace we always raise
                 else if (card.getHeight() == CardHeight.ACE)
                 {//If the opponent raised , we flat call , otherwise we raise
-                    if (state.OpponentAction.getAction().Equals("raise"))
-                        return "call";
+                    if (state.OpponentAction != null)
+                    {
+                        if (state.OpponentAction.getAction().Equals("raise"))
+                            return "call";
+                    }     
                     else
                         return "raise";
                 }
@@ -35,8 +41,11 @@ namespace TexasHoldEm.Bot
                     //IF we have K6 suited or better
                     if (card.getSuit() == othercard.getSuit() && (int)othercard.getHeight() > 6)
                         //If the opponent raised , we flat call , otherwise we raise
-                        if (state.OpponentAction.getAction().Equals("raise"))
-                            return "call";
+                        if (state.OpponentAction != null)
+                        {
+                            if (state.OpponentAction.getAction().Equals("raise"))
+                                return "call";
+                        }     
                         else 
                             return "raise";
                     else
