@@ -12,6 +12,30 @@ namespace TexasHoldEm.Strategy
         {
             return HandEval.Evaluate(state, hand);
         }
+        public PokerMove EvaluateBoard(BotState state, HandHoldem hand)
+        {
+            var handCategory = GetHandCategory(state, hand);
+
+            if (handCategory == HandCategory.Pair)
+            {
+                if (state.OpponentAction.getAction().Equals("raise"))
+                    return new PokerMove(state.MyName, "call", state.AmountToCall);
+                else
+                    return new PokerMove(state.MyName, "raise", 2 * state.Pot);
+            }
+            //We have a highcard
+            else
+            {
+                if (PreFlopStrategy.StartingHandEvalute(state, hand) == "raise"
+                    && state.AmountToCall < 5 * state.Pot)
+                    return new PokerMove(state.MyName, "call", state.AmountToCall);
+                else if (!state.OpponentAction.getAction().Equals("raise"))
+                    return new PokerMove(state.MyName, "check", 0);
+                else if (state.OpponentAction.getAction().Equals("raise") && state.AmountToCall > state.Pot)
+                    return new PokerMove(state.MyName, "fold", 0);
+            }
+            return new PokerMove(state.MyName, "check", 0);
+        }
         /// <summary>
         /// Askins the bot to perform a move, depending on the current state of the game
         /// </summary>
@@ -21,9 +45,6 @@ namespace TexasHoldEm.Strategy
         public PokerMove GetMove(BotState state, long timeOut)
         {
             HandHoldem hand = state.Hand;
-            var handCategory = GetHandCategory(state, hand);
-
-
             // We are playing preflop
             if (state.Table.Count == 0)
             {
@@ -43,69 +64,17 @@ namespace TexasHoldEm.Strategy
             //We are playing after the flop
             else if(state.Table.Count == 3)
             {
-                if(handCategory == HandCategory.Pair)
-                    if(state.OpponentAction.getAction().Equals("raise"))
-                        return new PokerMove(state.MyName, "call", state.AmountToCall);
-                    else 
-                        return new PokerMove(state.MyName, "raise",2 * state.Pot);
-                //We have a highcard
-                else
-                {
-                    if (PreFlopStrategy.StartingHandEvalute(state, hand) == "raise"
-                        && state.AmountToCall < 5 * state.Pot)
-                        return new PokerMove(state.MyName, "call", state.AmountToCall);
-                    else if(!state.OpponentAction.getAction().Equals("raise"))
-                        return new PokerMove(state.MyName, "check", 0);
-                    else if(state.OpponentAction.getAction().Equals("raise") && state.AmountToCall > state.Pot)
-                        return new PokerMove(state.MyName, "fold", 0);
-                }
-
+                return EvaluateBoard(state, hand);
             }
             //We are playing after the turn
             else if(state.Table.Count == 4)
             {
-                if (handCategory == HandCategory.Pair)
-                    if (state.OpponentAction.getAction().Equals("raise"))
-                        return new PokerMove(state.MyName, "call", state.AmountToCall);
-                    else
-                        return new PokerMove(state.MyName, "raise", 2 * state.Pot);
-                //We have a highcard
-                else
-                {
-                    if (PreFlopStrategy.StartingHandEvalute(state, hand) == "raise"
-                        && state.AmountToCall < 5 * state.Pot)
-                    {
-                        if(state.AmountToCall > 0)
-                            return new PokerMove(state.MyName, "call", state.AmountToCall);
-                        else
-                            return new PokerMove(state.MyName, "check", state.AmountToCall);
-                    }
-                        
-                    if (!state.OpponentAction.getAction().Equals("raise"))
-                        return new PokerMove(state.MyName, "check", 0);
-                    else if (state.OpponentAction.getAction().Equals("raise") && state.AmountToCall > state.Pot)
-                        return new PokerMove(state.MyName, "fold", 0);
-                } 
+                return EvaluateBoard(state, hand);
             }
             //We are playing after the river
             else if(state.Table.Count == 5)
             {
-                if (handCategory == HandCategory.Pair)
-                    if (state.OpponentAction.getAction().Equals("raise"))
-                        return new PokerMove(state.MyName, "call", state.AmountToCall);
-                    else
-                        return new PokerMove(state.MyName, "raise", 2 * state.Pot);
-                //We have a highcard
-                else
-                {
-                    if (PreFlopStrategy.StartingHandEvalute(state, hand) == "raise"
-                        && state.AmountToCall < 5 * state.Pot)
-                        return new PokerMove(state.MyName, "call", state.AmountToCall);
-                    if (!state.OpponentAction.getAction().Equals("raise"))
-                        return new PokerMove(state.MyName, "check", 0);
-                    else if (state.OpponentAction.getAction().Equals("raise") && state.AmountToCall > state.Pot)
-                        return new PokerMove(state.MyName, "fold", 0);
-                } 
+                return EvaluateBoard(state, hand);
             }
             return new PokerMove(state.MyName, "check", 0);
         }
