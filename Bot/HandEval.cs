@@ -44,6 +44,11 @@ namespace TexasHoldEm.Bot
             }
             private static HandCategory CheckTwoPair(BotState state, HandHoldem hand)
             {
+                //To do
+                // foreach(var card in hand.Cards)
+                // {
+
+                // }
                 return CheckPair(state, hand);
             }
             private static HandCategory CheckPair(BotState state, HandHoldem hand)

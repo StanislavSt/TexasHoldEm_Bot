@@ -61,22 +61,7 @@ namespace TexasHoldEm.Strategy
                         return new PokerMove(state.MyName, "check", 0);
                 }
             }  
-            //We are playing after the flop
-            else if(state.Table.Count == 3)
-            {
-                return EvaluateBoard(state, hand);
-            }
-            //We are playing after the turn
-            else if(state.Table.Count == 4)
-            {
-                return EvaluateBoard(state, hand);
-            }
-            //We are playing after the river
-            else if(state.Table.Count == 5)
-            {
-                return EvaluateBoard(state, hand);
-            }
-            return new PokerMove(state.MyName, "check", 0);
+            return EvaluateBoard(state, hand);
         }
     }
 }
