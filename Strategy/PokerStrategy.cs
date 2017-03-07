@@ -15,12 +15,17 @@ namespace TexasHoldEm.Strategy
         public PokerMove EvaluateBoard(BotState state, HandHoldem hand)
         {
             var handCategory = GetHandCategory(state, hand);
-
+            //Check for Pair
             if (handCategory == HandCategory.Pair)
             {
                 if (state.OpponentAction.getAction().Equals("raise"))
                     return new PokerMove(state.MyName, "call", state.AmountToCall);
                 else
+                    return new PokerMove(state.MyName, "raise", 2 * state.Pot);
+            }
+            //Check for twowPair
+            else if (handCategory == HandCategory.TwoPair)
+            {
                     return new PokerMove(state.MyName, "raise", 2 * state.Pot);
             }
             //We have a highcard
