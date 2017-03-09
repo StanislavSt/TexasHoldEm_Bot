@@ -8,14 +8,20 @@ namespace TexasHoldEm.Strategy
 {
     public class PokerStrategy : IBot
     {
+        /// <summary>
+        /// Ge the hand category (ex. Two pair)
+        /// </summary>
         public HandCategory GetHandCategory(BotState state,HandHoldem hand)
         {
             return HandEval.Evaluate(state, hand);
         }
+        /// <summary>
+        /// Evaluate the board and return a Poker move
+        /// </summary>
         public PokerMove EvaluateBoard(BotState state, HandHoldem hand)
         {
             var handCategory = GetHandCategory(state, hand);
-            //Check for Pair
+            //Pair
             if (handCategory == HandCategory.Pair)
             {
                 if (state.OpponentAction.getAction().Equals("raise"))
@@ -23,7 +29,7 @@ namespace TexasHoldEm.Strategy
                 else
                     return new PokerMove(state.MyName, "raise", 2 * state.Pot);
             }
-            //Check for twowPair
+            //Two Pair
             else if (handCategory == HandCategory.TwoPair)
             {
                     return new PokerMove(state.MyName, "raise", 2 * state.Pot);

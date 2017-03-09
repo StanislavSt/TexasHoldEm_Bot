@@ -22,6 +22,9 @@ namespace TexasHoldEm.Bot
         public PokerMove OpponentAction { get; private set; }
         public int CurrentBet { get; private set; }
         public HandHoldem Hand { get; private set; }
+        /// <summary>
+        /// Cards on the table
+        /// </summary>
         public List<Card> Table { get; private set; }
         public List<int> Sidepots { get; private set; }
         public string MyName { get; private set; }
