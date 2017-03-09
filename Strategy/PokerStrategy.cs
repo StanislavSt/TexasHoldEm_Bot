@@ -34,6 +34,11 @@ namespace TexasHoldEm.Strategy
             {
                     return new PokerMove(state.MyName, "raise", 2 * state.Pot);
             }
+            //Three of a kind
+            else if(handCategory == HandCategory.TwoPair)
+            {
+                    return new PokerMove(state.MyName, "raise", 2 * state.Pot);
+            }
             //We have a highcard
             else
             {
