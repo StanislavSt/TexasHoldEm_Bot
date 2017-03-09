@@ -40,7 +40,12 @@ namespace TexasHoldEm.Bot
             }
             private static HandCategory CheckThreeOfAKind(BotState state, HandHoldem hand)
             {
-                return CheckTwoPair(state, hand);
+                if(hand.Cards.Concat(state.Table)
+                .GroupBy(x => x.getHeight())
+                .Any(group => group.Count() == 3))
+                    return HandCategory.ThreeOfAKind;
+                else
+                    return CheckTwoPair(state, hand);
             }
             private static HandCategory CheckTwoPair(BotState state, HandHoldem hand)
             {
