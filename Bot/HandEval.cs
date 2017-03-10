@@ -51,7 +51,7 @@ namespace TexasHoldEm.Bot
             {
                 if(hand.Cards.Concat(state.Table)
                 .GroupBy(x => x.getSuit())
-                .Count(group => group.Count() == 2) > 1)
+                .Count(group => group.Count() >= 2) > 1)
                     return HandCategory.TwoPair;
                 else
                     return CheckPair(state, hand);
@@ -70,4 +70,7 @@ namespace TexasHoldEm.Bot
             }
         }
     }
-    List<Cards>
+    string name = "s";
+    var result = 
+                from u in users
+                where new[] {"Peter" , "John"} .Contains(name)
