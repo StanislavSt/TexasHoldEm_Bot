@@ -8,6 +8,7 @@ using TexasHoldEm.Enums;
 
 namespace TexasHoldEm.Bot
 {
+    //http://codereview.stackexchange.com/questions/36841/poker-hand-evaluator-challenge
         public static class HandEval
         {
             public static HandCategory Evaluate(BotState state, HandHoldem hand)
@@ -24,7 +25,12 @@ namespace TexasHoldEm.Bot
             }
             private static HandCategory CheckFourOfAKind(BotState state, HandHoldem hand)
             {
-                return CheckFullHouse(state, hand);
+                if(hand.Cards.Concat(state.Table)
+                .GroupBy(x => x.getHeight())
+                .Any(group => group.Count() == 3))
+                    return HandCategory.FourOfAKind;
+                else
+                    return CheckFullHouse(state, hand);
             }
             private static HandCategory CheckFullHouse(BotState state, HandHoldem hand)
             {
@@ -32,7 +38,12 @@ namespace TexasHoldEm.Bot
             }
             private static HandCategory CheckFlush(BotState state, HandHoldem hand)
             {
-                return CheckStraight(state, hand);
+                if(hand.Cards.Concat(state.Table)
+                .GroupBy(x => x.getSuit())
+                .Count()==1)
+                    return HandCategory.Flush;
+                else
+                    return CheckStraight(state, hand);
             }
             private static HandCategory CheckStraight(BotState state, HandHoldem hand)
             {
@@ -69,8 +80,4 @@ namespace TexasHoldEm.Bot
                 return HandCategory.NoPair;
             }
         }
-    }
-    string name = "s";
-    var result = 
-                from u in users
-                where new[] {"Peter" , "John"} .Contains(name)
+}
