@@ -8,7 +8,7 @@ namespace TexasHoldEm.Poker
 {
     public class Card
     {
-        public CardHeight height;
+        private CardHeight height;
         private CardSuit suit;
         private int number;
         private static Dictionary<string, Card> stringToCard;
@@ -99,15 +99,6 @@ namespace TexasHoldEm.Poker
 		    }
             return stringToCard[s];
 	    }
-        /// <summary>
-        /// Returns the number of the card as a long.
-        /// </summary>
-        public long getNumber()
-        {
-            int suitShift = number / 13;
-            int heightShift = number % 13;
-            return (1L << (16 * suitShift + heightShift));
-        }
         /// <summary>
         ///Returns the height of this card.
         /// </summary>
