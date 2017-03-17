@@ -19,7 +19,8 @@ namespace TexasHoldEm.Poker
         {
             if (index >= 0 && index < this.Cards.Count)
                 return this.Cards[index];
-            return null;
+            else
+                return null;
         }
         public string HandString()
         {

@@ -38,11 +38,8 @@ namespace TexasHoldEm.Bot
                     if (card.getSuit() == othercard.getSuit() && (int)othercard.getHeight() > 6)
                     {
                         //If the opponent raised , we flat call , otherwise we raise
-                        if (state.OpponentAction != null)
-                        {
-                            if (state.OpponentAction.getAction().Equals("raise"))
-                                return "call";
-                        }
+                        if (state.OpponentAction != null && state.OpponentAction.getAction().Equals("raise"))
+                            return "call";
                         else
                             return "raise";
                     }      
