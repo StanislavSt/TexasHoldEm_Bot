@@ -27,11 +27,8 @@ namespace TexasHoldEm.Bot
                 //If we have an Ace we always raise
                 else if (card.getHeight() == CardHeight.ACE)
                 {//If the opponent raised , we flat call , otherwise we raise
-                    if (state.OpponentAction != null)
-                    {
-                        if (state.OpponentAction.getAction().Equals("raise"))
-                            return "call";
-                    }     
+                    if (state.OpponentAction != null && state.OpponentAction.getAction().Equals("raise"))
+                            return "call";  
                     else
                         return "raise";
                 }
@@ -39,14 +36,16 @@ namespace TexasHoldEm.Bot
                 {
                     //IF we have K6 suited or better
                     if (card.getSuit() == othercard.getSuit() && (int)othercard.getHeight() > 6)
+                    {
                         //If the opponent raised , we flat call , otherwise we raise
                         if (state.OpponentAction != null)
                         {
                             if (state.OpponentAction.getAction().Equals("raise"))
                                 return "call";
-                        }     
-                        else 
+                        }
+                        else
                             return "raise";
+                    }      
                     else
                         return "fold";
                 }
@@ -54,11 +53,8 @@ namespace TexasHoldEm.Bot
                 else if((int)card.getHeight() - (int)othercard.getHeight() < 2  && card.getSuit() == othercard.getSuit())
                 {
                     //If the opponent raised , we flat call , otherwise we raise
-                    if (state.OpponentAction != null)
-                    {
-                        if (state.OpponentAction.getAction().Equals("raise"))
+                    if (state.OpponentAction != null && state.OpponentAction.getAction().Equals("raise"))
                             return "call";
-                    }
                     else
                         return "raise";
                 }
