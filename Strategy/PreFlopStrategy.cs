@@ -11,10 +11,9 @@ namespace TexasHoldEm.Bot
         //https://tinyurl.com/je4sdav
         public static string StartingHandEvalute(BotState state, HandHoldem hand)
         {
-            foreach (var card in hand.Cards)
-            {
+                Card card = hand.GetCard(0);
                 //Store the 2nd card in our hand
-                Card othercard = hand.Cards.Single(x => x != card);
+                Card othercard = hand.GetCard(1);
                 // We have a pocket pair
                 if (card.getHeight() == othercard.getHeight())
                 {
@@ -53,16 +52,18 @@ namespace TexasHoldEm.Bot
                 }
                  // We have suited connectors
                 else if((int)card.getHeight() - (int)othercard.getHeight() < 2  && card.getSuit() == othercard.getSuit())
+                {
                     //If the opponent raised , we flat call , otherwise we raise
-                    if (state.OpponentAction !=null)
+                    if (state.OpponentAction != null)
                     {
                         if (state.OpponentAction.getAction().Equals("raise"))
                             return "call";
-                    }        
+                    }
                     else
                         return "raise";
-            }
-            return "fold";
+                }
+                return "fold";
+                   
         }
     }
 }
